@@ -81,8 +81,8 @@ export class UploadPageComponent {
     this.originalUrl.set(URL.createObjectURL(file));
 
     try {
-      this.logger.log('Compressing image...');
-      const compressedFile = await this.processingService.compressImage(file);
+      this.logger.log('Compressing image (800px max for stability)...');
+      const compressedFile = await this.processingService.compressImage(file, 800);
 
       this.logger.log('Sending to backend...');
       this.processingService.removeBackground(compressedFile).subscribe({
