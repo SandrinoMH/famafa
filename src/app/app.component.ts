@@ -36,4 +36,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AppComponent {
   title = 'remove-bg-app';
+  
+  constructor() {
+    console.log('%c [FAMAFA] Application Initialisée v2.1', 'color: white; background: green; padding: 5px; border-radius: 3px;');
+  }
 }
