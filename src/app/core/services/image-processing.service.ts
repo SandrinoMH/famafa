@@ -12,6 +12,7 @@ export class ImageProcessingService {
    * This avoids server RAM limits and reduces latency.
    */
   removeBackground(file: File): Observable<Blob> {
+    console.log('%c [FAMAFA] Démarrage de l\'IA Locale...', 'background: #222; color: #bada55; font-size: 20px;');
     const config: any = {
       progress: (status: string, progress: number) => {
         console.log(`AI Progress: ${status} (${Math.round(progress * 100)}%)`);

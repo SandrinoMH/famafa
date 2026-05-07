@@ -28,7 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 
     <footer class="app-footer">
       <div class="container">
-        <p>&copy; 2026 Famafa - Propulsé par Sandrino</p>
+        <p>&copy; 2026 Famafa - Propulsé par Sandrino | <small>v2.1 (Local AI Mode)</small></p>
       </div>
     </footer>
   `,
