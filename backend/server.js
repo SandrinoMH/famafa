@@ -23,6 +23,7 @@ app.use('/api/', limiter);
 app.use(express.json());
 
 // Routes
+app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date() }));
 app.use('/api/remove-bg', removeBgRoute);
 
 app.listen(PORT, () => {

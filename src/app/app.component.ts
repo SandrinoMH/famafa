@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
         </div>
         <span class="spacer"></span>
         <button mat-icon-button>
-          <mat-icon>help_outline</mat-icon>
+          
         </button>
       </div>
     </mat-toolbar>
