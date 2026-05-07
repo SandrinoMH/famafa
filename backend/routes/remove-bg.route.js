@@ -24,6 +24,11 @@ router.post('/', upload.single('image'), async (req, res) => {
   const outputPath = `${inputPath}_out.png`;
 
   try {
+    console.log(`[DEBUG] Request received for ${req.file ? req.file.originalname : 'no file'}`);
+    
+    // TEST DE DIAGNOSTIC : On renvoie 200 immédiatement pour tester le lien réseau
+    return res.status(200).json({ message: 'CONNECTION_OK' });
+
     console.log(`Processing ${inputPath} -> ${outputPath}...`);
     const scriptPath = path.join(__dirname, '../process.py');
     const command = `python "${scriptPath}" "${inputPath}" "${outputPath}"`;
