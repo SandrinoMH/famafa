@@ -17,10 +17,10 @@ export class ImageProcessingService {
       progress: (status: string, progress: number) => {
         console.log(`AI Progress: ${status} (${Math.round(progress * 100)}%)`);
       },
-      model: 'medium', // 'small' is faster but less accurate, 'medium' is a good balance
+      model: 'large', // Qualité maximale
       output: {
         format: 'image/png',
-        quality: 0.8
+        quality: 1.0 // Qualité maximale sans perte
       }
     };
 
