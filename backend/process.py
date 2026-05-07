@@ -7,17 +7,13 @@ def process(input_path, output_path):
     try:
         input_image = Image.open(input_path)
         
-        # Utilisation du modèle ISNet (plus précis pour les formes complexes et les trous)
-        session = new_session("isnet-general-use")
+        # Utilisation du modèle standard u2net (plus léger en RAM que isnet)
+        session = new_session("u2net")
         
-        # Amélioration de la qualité avec alpha_matting
+        # Traitement simple sans alpha_matting pour économiser la RAM sur le plan gratuit
         output_image = remove(
             input_image,
-            session=session,
-            alpha_matting=True,
-            alpha_matting_foreground_threshold=240,
-            alpha_matting_background_threshold=10,
-            alpha_matting_erode_size=10
+            session=session
         )
         output_image.save(output_path)
         print("SUCCESS")
