@@ -24,7 +24,7 @@ import { LoggerService } from '../../core/services/logger.service';
   template: `
     <div class="upload-page">
       <header class="upload-page__header">
-        <h1>Supprimer le fond d'image</h1>
+        <h1>Famafa <small style="font-size: 0.5em; opacity: 0.5;">v2.2</small></h1>
         <p>Téléchargez une image pour enlever le fond instantanément et gratuitement.</p>
       </header>
 
