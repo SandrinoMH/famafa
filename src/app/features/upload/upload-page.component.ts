@@ -35,8 +35,12 @@ import { LoggerService } from '../../core/services/logger.service';
 
         @if (isLoading()) {
           <div class="upload-page__loader">
-            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-            <p>Traitement en cours...</p>
+            <div class="progress-info">
+              <span>{{ processingStatus() }}</span>
+              <span>{{ processingProgress() }}%</span>
+            </div>
+            <mat-progress-bar mode="determinate" [value]="processingProgress()"></mat-progress-bar>
+            <p class="loader-tip">C'est la première fois ? Le modèle IA (80Mo) est en cours de chargement...</p>
           </div>
         }
 
@@ -62,6 +66,8 @@ export class UploadPageComponent {
   private snackBar = inject(MatSnackBar);
 
   isLoading = signal(false);
+  processingProgress = signal(0);
+  processingStatus = signal('Initialisation...');
   originalUrl = signal<string | null>(null);
   resultUrl = signal<string | null>(null);
   currentResult = signal<Blob | null>(null);
@@ -85,7 +91,19 @@ export class UploadPageComponent {
       const compressedFile = await this.processingService.compressImage(file, 2000);
 
       this.logger.log('Traitement IA local (Navigateur)...');
-      this.processingService.removeBackground(compressedFile).subscribe({
+      this.processingProgress.set(0);
+      
+      this.processingService.removeBackground(compressedFile, (status, progress) => {
+        // Map status to French
+        const statusMap: {[key: string]: string} = {
+          'fetch': 'Téléchargement du modèle...',
+          'compute': 'Calcul en cours...',
+          'process': 'Traitement de l\'image...',
+          'complete': 'Terminé !'
+        };
+        this.processingStatus.set(statusMap[status] || 'Traitement...');
+        this.processingProgress.set(Math.round(progress * 100));
+      }).subscribe({
         next: async (blob) => {
           this.currentResult.set(blob);
           const resultBlobUrl = URL.createObjectURL(blob);

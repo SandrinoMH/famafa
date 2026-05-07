@@ -11,16 +11,17 @@ export class ImageProcessingService {
    * Removes background using client-side WASM (imgly).
    * This avoids server RAM limits and reduces latency.
    */
-  removeBackground(file: File): Observable<Blob> {
-    console.log('%c [FAMAFA] Démarrage de l\'IA Locale...', 'background: #222; color: #bada55; font-size: 20px;');
+  removeBackground(file: File, onProgress?: (status: string, progress: number) => void): Observable<Blob> {
+    console.log('%c [FAMAFA] Démarrage de l\'IA Locale (Large)...', 'background: #222; color: #bada55; font-size: 20px;');
     const config: any = {
       progress: (status: string, progress: number) => {
+        if (onProgress) onProgress(status, progress);
         console.log(`AI Progress: ${status} (${Math.round(progress * 100)}%)`);
       },
-      model: 'large', // Qualité maximale
+      model: 'large',
       output: {
         format: 'image/png',
-        quality: 1.0 // Qualité maximale sans perte
+        quality: 1.0
       }
     };
 
