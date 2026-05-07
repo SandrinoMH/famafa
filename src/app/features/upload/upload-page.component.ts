@@ -34,13 +34,25 @@ import { LoggerService } from '../../core/services/logger.service';
         }
 
         @if (isLoading()) {
-          <div class="upload-page__loader">
-            <div class="progress-info">
-              <span>{{ processingStatus() }}</span>
-              <span>{{ processingProgress() }}%</span>
+          <div class="modern-loader">
+            <div class="modern-loader__icon">
+              <mat-icon>auto_fix_high</mat-icon>
             </div>
-            <mat-progress-bar mode="determinate" [value]="processingProgress()"></mat-progress-bar>
-            <p class="loader-tip">C'est la première fois ? Le modèle IA (80Mo) est en cours de chargement...</p>
+            
+            <div class="modern-loader__info">
+              <span class="status">{{ processingStatus() }}</span>
+              <span class="percentage">{{ processingProgress() }}%</span>
+            </div>
+
+            <div class="modern-loader__bar-container">
+              <div class="modern-loader__bar" [style.width.%]="processingProgress()">
+                <div class="modern-loader__shimmer"></div>
+              </div>
+            </div>
+
+            <p class="modern-loader__tip">
+              {{ processingProgress() < 30 ? 'Préparation de vos outils magiques...' : 'L\'IA analyse chaque pixel pour vous...' }}
+            </p>
           </div>
         }
 
