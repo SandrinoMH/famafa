@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { UploadZoneComponent } from './upload-zone.component';
 import { ResultComponent } from '../result/result.component';
@@ -16,6 +17,7 @@ import { LoggerService } from '../../core/services/logger.service';
   imports: [
     CommonModule,
     MatProgressBarModule,
+    MatIconModule,
     MatSnackBarModule,
     UploadZoneComponent,
     ResultComponent,
