@@ -1,37 +1,36 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { Observable, from } from 'rxjs';
+import removeBackground from '@imgly/background-removal';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageProcessingService {
-  private http = inject(HttpClient);
-  private apiUrl = environment.apiUrl;
 
+  /**
+   * Removes background using client-side WASM (imgly).
+   * This avoids server RAM limits and reduces latency.
+   */
   removeBackground(file: File): Observable<Blob> {
-    const formData = new FormData();
-    formData.append('image', file);
+    const config: any = {
+      progress: (status: string, progress: number) => {
+        console.log(`AI Progress: ${status} (${Math.round(progress * 100)}%)`);
+      },
+      model: 'medium', // 'small' is faster but less accurate, 'medium' is a good balance
+      output: {
+        format: 'image/png',
+        quality: 0.8
+      }
+    };
 
-    return this.http.post(`${this.apiUrl}/remove-bg`, formData, {
-      responseType: 'blob'
-    }).pipe(
-      catchError(this.handleError)
-    );
+    // Convert the Promise to an Observable to maintain compatibility with existing components
+    return from(removeBackground(file, config));
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Une erreur inconnue est survenue.';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Erreur : ${error.error.message}`;
-    } else {
-      errorMessage = `Code d'erreur : ${error.status}\nMessage : ${error.message}`;
-    }
-    return throwError(() => new Error(errorMessage));
-  }
-
-  async compressImage(file: File, maxWidth = 2000): Promise<File> {
+  /**
+   * Compresses an image using Canvas.
+   */
+  async compressImage(file: File, maxWidth = 1500): Promise<File> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -51,7 +50,9 @@ export class ImageProcessingService {
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext('2d');
-          ctx?.drawImage(img, 0, 0, width, height);
+          if (!ctx) return reject('Canvas error');
+          
+          ctx.drawImage(img, 0, 0, width, height);
 
           canvas.toBlob((blob) => {
             if (blob) {
