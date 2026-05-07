@@ -12,10 +12,15 @@ Le frontend Angular est prêt pour Vercel.
 - **Output Directory** : `dist/remove-bg-app/browser`
 - **Framework Preset** : `Angular`
 
-### 2. Backend (Render / Railway / VPS)
-Hébergez le dossier `backend` sur un service supportant Python et Node.js.
-- **Commande de lancement** : `node server.js`
-- **Dépendances système** : Python 3.12 + `pip install "rembg[cpu,cli]"`
+### 2. Backend (Render / Railway / VPS - RECOMMANDÉ)
+Le backend utilise Python. La meilleure façon de le déployer est d'utiliser le **Dockerfile** que j'ai créé dans le dossier `backend`.
+
+**Sur Render.com :**
+1. Créez un nouveau "Web Service".
+2. Liez votre repo GitHub.
+3. Dans "Root Directory", mettez `.` (la racine).
+4. Render détectera automatiquement le `Dockerfile` dans le dossier `backend` (ou vous pouvez spécifier le chemin `backend/Dockerfile`).
+5. Assurez-vous d'allouer au moins **2 Go de RAM** pour que le modèle IA tourne confortablement.
 
 ---
 
