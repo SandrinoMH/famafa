@@ -7,11 +7,16 @@ const removeBgRoute = require('./routes/remove-bg.route');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security
+// Security - Relaxed for cross-domain communication
 app.use(helmet({
-    crossOriginResourcePolicy: false, // Allow local images
+    crossOriginResourcePolicy: false,
+    contentSecurityPolicy: false, // Avoid blocking requests from other domains
 }));
-app.use(cors());
+app.use(cors({
+    origin: '*', // Explicitly allow all origins
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Rate limiting
 const limiter = rateLimit({
