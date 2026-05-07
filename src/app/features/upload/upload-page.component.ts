@@ -36,25 +36,14 @@ import { LoggerService } from '../../core/services/logger.service';
         }
 
         @if (isLoading()) {
-          <div class="modern-loader">
-            <div class="modern-loader__icon">
-              <mat-icon>auto_fix_high</mat-icon>
+          <div class="pure-loader">
+            <div class="pure-loader__status">
+              <span>Traitement de votre image...</span>
+              <span class="pure-loader__percentage">{{ processingProgress() }}%</span>
             </div>
-            
-            <div class="modern-loader__info">
-              <span class="status">{{ processingStatus() }}</span>
-              <span class="percentage">{{ processingProgress() }}%</span>
+            <div class="pure-loader__track">
+              <div class="pure-loader__fill" [style.width.%]="processingProgress()"></div>
             </div>
-
-            <div class="modern-loader__bar-container">
-              <div class="modern-loader__bar" [style.width.%]="processingProgress()">
-                <div class="modern-loader__shimmer"></div>
-              </div>
-            </div>
-
-            <p class="modern-loader__tip">
-              {{ processingProgress() < 30 ? 'Préparation de vos outils magiques...' : 'L\'IA analyse chaque pixel pour vous...' }}
-            </p>
           </div>
         }
 
