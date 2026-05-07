@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "public": true,
+  "name": "famafa",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://votre-backend-famafa.onrender.com/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(var(--primary-rgb), 0.95) !important;
+  backdrop-filter: blur(8px);
+
+  .container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+
+    mat-icon {
+      font-size: 28px;
+      height: 28px;
+      width: 28px;
+    }
+  }
+}
+
+.app-container {
+  min-height: calc(100vh - 64px - 60px);
+  padding-bottom: 40px;
+}
+
+.app-footer {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(var(--primary-rgb), 0.1);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

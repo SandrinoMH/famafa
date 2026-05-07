@@ -1,0 +1,43 @@
+:root {
+  --primary-color: #6366f1;
+  --primary-rgb: 99, 102, 241;
+  --secondary-color: #a855f7;
+  --secondary-rgb: 168, 85, 247;
+  --surface-color: #ffffff;
+  --surface-rgb: 255, 255, 255;
+  --background-color: #f8fafc;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Outfit', 'Inter', 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Material Overrides */
+.mat-toolbar.mat-primary {
+  background: var(--primary-color);
+}
+
+.mat-flat-button.mat-primary {
+  background: var(--primary-color);
+  border-radius: 12px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+}
