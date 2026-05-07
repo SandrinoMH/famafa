@@ -1,0 +1,15 @@
+node_modules
+src
+dist
+.git
+.angular
+backend/node_modules
+backend/uploads/*
+!backend/uploads/.gitkeep
+*.png
+*.jpg
+.env
+Dockerfile
+vercel.json
+README.md
+README_DEPLOY.md
