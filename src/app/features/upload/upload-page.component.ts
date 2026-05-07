@@ -113,7 +113,8 @@ export class UploadPageComponent {
         error: (err) => {
           this.logger.error('Processing failed', err);
           this.isLoading.set(false);
-          this.snackBar.open('Erreur lors du traitement de l\'image.', 'Fermer', { duration: 3000 });
+          const detail = err.message || 'Erreur inconnue';
+          this.snackBar.open(`ÉCHEC : ${detail}`, 'Détails', { duration: 10000 });
         }
       });
     } catch (err) {
