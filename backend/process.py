@@ -7,8 +7,8 @@ def process(input_path, output_path):
     try:
         input_image = Image.open(input_path)
         
-        # Utilisation du modèle standard u2net (plus léger en RAM que isnet)
-        session = new_session("u2net")
+        # Utilisation du modèle ultra-léger 'u2netp' (version portable pour faible RAM)
+        session = new_session("u2netp")
         
         # Traitement simple sans alpha_matting pour économiser la RAM sur le plan gratuit
         output_image = remove(

@@ -23,7 +23,7 @@ RUN mkdir -p backend/uploads
 RUN pip install --no-cache-dir "rembg[cpu,cli]" Pillow
 
 # Pré-télécharger le modèle pour éviter les timeouts au premier lancement
-RUN python3 -c "from rembg import new_session; new_session('u2net')"
+RUN python3 -c "from rembg import new_session; new_session('u2netp')"
 
 EXPOSE 3000
 
